@@ -1,0 +1,17 @@
+<svg width="57" height="63" viewBox="0 0 57 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 357">
+<rect id="Rectangle 224" x="11.4999" y="10.9286" width="45.3571" height="51.4286" rx="5" fill="#F5F9FC"/>
+<g id="Rectangle 221" filter="url(#filter0_b_41_203)">
+<rect x="0.785706" y="0.571411" width="48.5714" height="54.2857" rx="5" fill="#6595BB" fill-opacity="0.13"/>
+</g>
+<path id="Union" fill-rule="evenodd" clip-rule="evenodd" d="M22.6442 28.3693C22.6833 29.5967 23.6896 30.5715 24.9176 30.5715C26.1256 30.5715 27.1229 29.6271 27.1887 28.4208L27.7712 17.7425C27.8567 16.175 26.6088 14.8572 25.039 14.8572C23.4937 14.8572 22.255 16.1359 22.3041 17.6805L22.6442 28.3693ZM25.0714 39.5C26.6494 39.5 27.9286 38.2208 27.9286 36.6429C27.9286 35.0649 26.6494 33.7858 25.0714 33.7858C23.4935 33.7858 22.2143 35.0649 22.2143 36.6429C22.2143 38.2208 23.4935 39.5 25.0714 39.5Z" fill="white" fill-opacity="0.8"/>
+</g>
+<defs>
+<filter id="filter0_b_41_203" x="-6.35715" y="-6.57145" width="62.8571" height="68.5714" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="3.57143"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_41_203"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_41_203" result="shape"/>
+</filter>
+</defs>
+</svg>

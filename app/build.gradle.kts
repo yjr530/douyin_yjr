@@ -50,4 +50,6 @@ dependencies {
 
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.squareup.picasso:picasso:2.71828")
 }

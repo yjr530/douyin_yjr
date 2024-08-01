@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.xiaomi.douyin_yjr.PlayVideoActivity
 import com.xiaomi.douyin_yjr.R
 import com.xiaomi.douyin_yjr.data.Video
@@ -23,22 +24,25 @@ class RecyclerAdapter(val videoList: List<Video>) :
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.video_item, parent, false)
         val viewHolder = ViewHolder(view)
+
         viewHolder.itemView.setOnClickListener {
             val position = viewHolder.adapterPosition
             val video = videoList[position]
-            Toast.makeText(
-                parent.context, "you clicked view ${video.title}",
-                Toast.LENGTH_SHORT
-            ).show()
+//            Toast.makeText(
+//                parent.context, "you clicked view ${video.title}",
+//                Toast.LENGTH_SHORT
+//            ).show()
         }
         viewHolder.videoImage.setOnClickListener {
             val position = viewHolder.adapterPosition
             val video = videoList[position]
-            Toast.makeText(
-                parent.context, "you clicked view ${video.title}",
-                Toast.LENGTH_SHORT
-            ).show()
-            val intent = Intent(parent.context, PlayVideoActivity::class.java)
+//            Toast.makeText(
+//                parent.context, "you clicked view ${video.title}",
+//                Toast.LENGTH_SHORT
+//            ).show()
+            val intent = Intent(parent.context, PlayVideoActivity::class.java).apply {
+                putExtra("VIDEO_URI", video.uri.toString())
+            }
             parent.context.startActivity(intent)
         }
         return viewHolder
@@ -46,9 +50,11 @@ class RecyclerAdapter(val videoList: List<Video>) :
 
 
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
-        val fruit = videoList[position]
-        holder.videoImage.setImageResource(fruit.videoId)
-        holder.videoTitle.text = fruit.title
+        val video = videoList[position]
+        Glide.with(holder.itemView.context)
+            .load(video.thumbnail)
+            .into(holder.videoImage)
+        holder.videoTitle.text = video.title
     }
 
     override fun getItemCount(): Int {

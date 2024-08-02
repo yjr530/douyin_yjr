@@ -95,8 +95,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/passwordEdit"
         android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"
         android:layout_marginTop="60dp"
+        android:layout_marginRight="60dp"
         android:layout_marginBottom="15dp"
         android:text="立即登录" />
 
@@ -110,14 +110,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="没有账号？"/>
+            android:text="没有账号？" />
+
         <TextView
+            android:id="@+id/txt_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:textStyle="bold"
+            android:text="立即注册"
             android:textSize="16sp"
-            android:text="立即注册"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 </RelativeLayout>

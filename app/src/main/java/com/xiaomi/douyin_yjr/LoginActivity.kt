@@ -55,6 +55,11 @@ class LoginActivity : AppCompatActivity() {
 //                    Toast.LENGTH_SHORT
 //                ).show()
 //            }
+            if (account.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "账号或密码不能为空", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             if (userDao.getUser(account) == password) {
                 val editor = prefs.edit()
                 if (binding.rememberPass.isChecked) {
@@ -73,10 +78,32 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             } else {
                 Toast.makeText(
-                    this, "account or password is invalid",
+                    this, "账号或密码无效",
                     Toast.LENGTH_SHORT
                 ).show()
+                binding.accountEdit.setText("")
+                binding.passwordEdit.setText("")
             }
+        }
+        binding.txtRegister.setOnClickListener {
+            val account = binding.accountEdit.text.toString()
+            val password = binding.passwordEdit.text.toString()
+
+            if (account.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "账号和密码不能为空", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (userDao.getUser(account) != null) {
+                Toast.makeText(this, "账号已存在", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            userDao.addUser(account, password)
+            Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show()
+        }
+        binding.txtBack.setOnClickListener {
+            onBackPressed()
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.xiaomi.douyin_yjr
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
@@ -30,6 +31,14 @@ class PlayVideoActivity : AppCompatActivity() {
     private lateinit var backButton: ImageView
     private lateinit var downloadButton: TextView
 
+    private lateinit var likeCount: TextView
+    private lateinit var collectionCount: TextView
+    private lateinit var commentCount: TextView
+
+    private var isLiked=false
+    private var isCollectioned=false
+    private var isCommented=false
+
     private val handler = Handler()
     private val updateProgressRunnable = object : Runnable {
         override fun run() {
@@ -50,14 +59,19 @@ class PlayVideoActivity : AppCompatActivity() {
         }
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_video)
 
         videoView = findViewById(R.id.videoView)
-        progressBar= findViewById(R.id.processBar)
+        progressBar = findViewById(R.id.processBar)
         backButton = findViewById(R.id.back)
         downloadButton = findViewById(R.id.download)
+        likeCount = findViewById(R.id.likeCount)
+        collectionCount = findViewById(R.id.collectionCount)
+        commentCount = findViewById(R.id.commentCount)
+
 
         val videoUriString = intent.getStringExtra("VIDEO_URI")
         val videoUri = Uri.parse(videoUriString)
@@ -85,10 +99,10 @@ class PlayVideoActivity : AppCompatActivity() {
         }
 
         videoView.setOnPreparedListener { mediaPlayer ->
-            mediaPlayer.isLooping=true
+            mediaPlayer.isLooping = true
             progressBar.max = mediaPlayer.duration
             videoView.start()
-            isPlaying=true
+            isPlaying = true
             progressBar.visibility = View.VISIBLE
             handler.post(updateProgressRunnable)
         }
@@ -113,7 +127,11 @@ class PlayVideoActivity : AppCompatActivity() {
                 val videoUri = Uri.parse(videoUriString)
                 downloadVideo(videoUri)
             } else {
-                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
                     val videoUriString = intent.getStringExtra("VIDEO_URI")
                     val videoUri = Uri.parse(videoUriString)
                     downloadVideo(videoUri)
@@ -122,6 +140,47 @@ class PlayVideoActivity : AppCompatActivity() {
                 }
             }
         }
+
+        likeCount.setOnClickListener {
+            var currentCount = likeCount.text.toString().toIntOrNull() ?: 0
+            if (isLiked) {
+                likeCount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like, 0, 0, 0)
+                currentCount--
+                isLiked = false
+            } else {
+                likeCount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_liked, 0, 0, 0)
+                currentCount++
+                isLiked = true
+            }
+            likeCount.text = currentCount.toString()
+        }
+
+        collectionCount.setOnClickListener {
+            var currentCount = collectionCount.text.toString().toIntOrNull() ?: 0
+            if (isCollectioned) {
+                collectionCount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_collection, 0, 0, 0)
+                currentCount--
+                isCollectioned = false
+            } else {
+                collectionCount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_collectioned, 0, 0, 0)
+                currentCount++
+                isCollectioned = true
+            }
+            likeCount.text = currentCount.toString()
+        }
+
+        commentCount.setOnClickListener {
+            var currentCount = commentCount.text.toString().toIntOrNull() ?: 0
+            if (isCommented) {
+                currentCount--
+                isCommented = false
+            } else {
+                currentCount++
+                isCommented = true
+            }
+            commentCount.text = currentCount.toString()
+        }
+
 
     }
 
@@ -149,7 +208,8 @@ class PlayVideoActivity : AppCompatActivity() {
                         while (input.read(buffer).also { length = it } > 0) {
                             output.write(buffer, 0, length)
                         }
-                        Toast.makeText(this, "Video downloaded successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Video downloaded successfully", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             } ?: run {

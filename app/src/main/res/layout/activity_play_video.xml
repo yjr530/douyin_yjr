@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center_vertical"
     android:background="@color/black"
+    android:orientation="vertical"
     tools:context=".PlayVideoActivity">
 
     <LinearLayout
@@ -18,37 +18,97 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:id="@+id/download"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:layout_weight="1"
+            android:gravity="end|center_vertical"
             android:text="下载"
             android:textColor="@color/white"
-            android:textSize="18sp"
-            android:layout_marginEnd="20dp"
-            android:gravity="end|center_vertical"/>
+            android:textSize="18sp" />
 
     </LinearLayout>
 
 
     <VideoView
         android:id="@+id/videoView"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:layout_weight="1"
+        android:layout_gravity="center"
         android:scaleType="centerCrop" />
 
     <ProgressBar
         android:id="@+id/processBar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyleHorizontal"
         android:max="100" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/card_bg"
+            android:drawableStart="@drawable/ic_edit"
+            android:drawablePadding="5dp"
+            android:hint="说点什么..."
+            android:textColor="@color/white" />
+        <!-- 点赞数-->
+        <TextView
+            android:id="@+id/likeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:drawableStart="@drawable/ic_like"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="50"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+        <!-- 收藏数-->
+        <TextView
+            android:id="@+id/collectionCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:drawableStart="@drawable/ic_collection"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="16"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+        <!-- 评论数-->
+        <TextView
+            android:id="@+id/commentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:drawableStart="@drawable/ic_comment"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="48"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 
 </LinearLayout>
